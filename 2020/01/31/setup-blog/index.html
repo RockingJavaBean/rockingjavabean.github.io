@@ -126,7 +126,7 @@
 
 
 
-  <title>RockingJavaBean's Blog</title>
+  <title>个人博客：Hexo + Github Pages + travis | RockingJavaBean's Blog</title>
   
 
 
@@ -145,8 +145,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -219,9 +218,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -251,9 +250,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/01/31/setup-blog/" itemprop="url">个人博客：Hexo + Github Pages + travis</a></h1>
+          <h1 class="post-title" itemprop="name headline">个人博客：Hexo + Github Pages + travis</h1>
         
 
         <div class="post-meta">
@@ -301,9 +298,7 @@
       
 
       
-        
-          
-            <p>记录一下使用 <strong>Hexo</strong>, <strong>Github pages</strong> 和 <strong>Travis</strong> 搭建个人博客的过程。</p>
+        <p>记录一下使用 <strong>Hexo</strong>, <strong>Github pages</strong> 和 <strong>Travis</strong> 搭建个人博客的过程。</p>
 <p>目前实现的效果是，本地使用 <strong>Markdown</strong> 编写博客文章，travis 自动基于最新仓库源码，构建博客。<br>以上均为<strong>免费</strong>服务，无需花钱租用虚拟主机。</p>
 <h2 id="1-Github-Pages"><a href="#1-Github-Pages" class="headerlink" title="1. Github Pages"></a>1. Github Pages</h2><p>Github Pages 是 Github 提供的静态页面服务，依据其<a href="https://pages.github.com/" target="_blank" rel="noopener">官网</a>，使用的方式比较简单。<br>大体的 Gist 就是</p>
 <ol>
@@ -370,8 +365,6 @@
 <h2 id="5-Summary"><a href="#5-Summary" class="headerlink" title="5. Summary"></a>5. Summary</h2><p>详细配置请参考 <a href="https://github.com/RockingJavaBean/rockingjavabean.github.io" target="_blank" rel="noopener">repo</a>，博客访问地址为 <a href="https://rockingjavabean.github.io" target="_blank" rel="noopener">rockingjavabean.github.io</a>。</p>
 <p>以上<br>RockingJavaBean</p>
 
-          
-        
       
     </div>
     
@@ -388,12 +381,12 @@
       
 
       
+      
+      
 
       
 
       
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -403,10 +396,11 @@
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -414,6 +408,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -434,8 +432,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -477,6 +484,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Github-Pages"><span class="nav-number">1.</span> <span class="nav-text">1. Github Pages</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-流程"><span class="nav-number">2.</span> <span class="nav-text">2. 流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Hexo"><span class="nav-number">3.</span> <span class="nav-text">3. Hexo</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装命令行工具"><span class="nav-number">3.1.</span> <span class="nav-text">安装命令行工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hexo-的常用命令"><span class="nav-number">3.2.</span> <span class="nav-text">Hexo 的常用命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Travis"><span class="nav-number">4.</span> <span class="nav-text">4. Travis</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#整合-Github"><span class="nav-number">4.1.</span> <span class="nav-text">整合 Github</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#travis-yml"><span class="nav-number">4.2.</span> <span class="nav-text">.travis.yml</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Summary"><span class="nav-number">5.</span> <span class="nav-text">5. Summary</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -599,6 +622,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.0.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.0.0"></script>
+
+
 
   
 
