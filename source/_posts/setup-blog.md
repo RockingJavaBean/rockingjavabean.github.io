@@ -4,7 +4,7 @@ title: 个人博客：Hexo + Github Pages + travis
 
 记录一下使用 **Hexo**, **Github pages** 和 **Travis** 搭建个人博客的过程。
 
-目前实现的效果是，本地使用 **Markdown** 编写博客文章，travis 自动基于最新仓库源码，构建博客。
+目前实现的效果是，本地使用 **Markdown** 编写博客文章，travis 自动基于仓库源码，构建静态资源，完成网站部署。
 以上均为**免费**服务，无需花钱租用虚拟主机。
 
 ## 1. Github Pages
