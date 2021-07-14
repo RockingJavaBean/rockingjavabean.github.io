@@ -1,5 +1,7 @@
 ---
 title: 个人博客：Hexo + Github Pages + travis
+date: 2020-6-1 10:00:00
+tags: hexo blog travis
 ---
 
 记录一下使用 **Hexo**, **Github pages** 和 **Travis** 搭建个人博客的过程。
