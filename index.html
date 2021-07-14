@@ -64,7 +64,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="spring-boot design pattern strategy spring 设计模式," />
 
 
 
@@ -75,20 +75,21 @@
 
 
 
-<meta name="description" content="记录一下使用 Hexo, Github pages 和 Travis 搭建个人博客的过程。 目前实现的效果是，本地使用 Markdown 编写博客文章，travis 自动基于仓库源码，构建静态资源，完成网站部署。以上均为免费服务，无需花钱租用虚拟主机。 1. Github PagesGithub Pages 是 Github 提供的静态页面服务，依据其官网，使用的方式比较简单。大体的 Gist 就">
+<meta name="description" content="1. 简介策略模式用于避免编写开发者在方法里使用大量的 If-Else 语句，将使用算法的责任和算法本身分割开来，委派给不同的对象管理，提升代码可读性以及可维护性。   上下文 （Context） 维护指向具体策略的引用， 且仅通过策略接口与该对象进行交流。 策略 （Strategy） 接口是所有具体策略的通用接口， 它声明了一个上下文用于执行策略的方法。 客户端 （Client） 会创建一个特定">
 <meta property="og:type" content="article">
-<meta property="og:title" content="个人博客：Hexo + Github Pages + travis">
-<meta property="og:url" content="http://yoursite.com/2021/07/09/setup-blog/index.html">
+<meta property="og:title" content="spring boot 中实现策略模式">
+<meta property="og:url" content="http://yoursite.com/2021/06/16/spring-boot-strategy-pattern/index.html">
 <meta property="og:site_name" content="RockingJavaBean&#39;s Blog">
-<meta property="og:description" content="记录一下使用 Hexo, Github pages 和 Travis 搭建个人博客的过程。 目前实现的效果是，本地使用 Markdown 编写博客文章，travis 自动基于仓库源码，构建静态资源，完成网站部署。以上均为免费服务，无需花钱租用虚拟主机。 1. Github PagesGithub Pages 是 Github 提供的静态页面服务，依据其官网，使用的方式比较简单。大体的 Gist 就">
+<meta property="og:description" content="1. 简介策略模式用于避免编写开发者在方法里使用大量的 If-Else 语句，将使用算法的责任和算法本身分割开来，委派给不同的对象管理，提升代码可读性以及可维护性。   上下文 （Context） 维护指向具体策略的引用， 且仅通过策略接口与该对象进行交流。 策略 （Strategy） 接口是所有具体策略的通用接口， 它声明了一个上下文用于执行策略的方法。 客户端 （Client） 会创建一个特定">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://yoursite.com/images/blog.png">
-<meta property="og:image" content="http://yoursite.com/images/github_token.png">
-<meta property="article:published_time" content="2021-07-09T08:20:07.736Z">
-<meta property="article:modified_time" content="2021-07-09T08:20:07.736Z">
+<meta property="og:image" content="http://yoursite.com/images/strategy-pattern/structure.png">
+<meta property="og:image" content="http://yoursite.com/images/strategy-pattern/example.png">
+<meta property="article:published_time" content="2021-06-16T10:58:12.000Z">
+<meta property="article:modified_time" content="2021-07-14T09:37:04.872Z">
 <meta property="article:author" content="RockingJavaBean">
+<meta property="article:tag" content="spring-boot design pattern strategy spring 设计模式">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://yoursite.com/images/blog.png">
+<meta name="twitter:image" content="http://yoursite.com/images/strategy-pattern/structure.png">
 
 
 
@@ -120,7 +121,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2021/07/09/setup-blog/"/>
+  <link rel="canonical" href="http://yoursite.com/2021/06/16/spring-boot-strategy-pattern/"/>
 
 
 
@@ -220,189 +221,6 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/07/09/setup-blog/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="RockingJavaBean">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="RockingJavaBean's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2021/07/09/setup-blog/" itemprop="url">个人博客：Hexo + Github Pages + travis</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-07-09T08:20:07+00:00">2021-07-09</time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>记录一下使用 <strong>Hexo</strong>, <strong>Github pages</strong> 和 <strong>Travis</strong> 搭建个人博客的过程。</p>
-<p>目前实现的效果是，本地使用 <strong>Markdown</strong> 编写博客文章，travis 自动基于仓库源码，构建静态资源，完成网站部署。<br>以上均为<strong>免费</strong>服务，无需花钱租用虚拟主机。</p>
-<h2 id="1-Github-Pages"><a href="#1-Github-Pages" class="headerlink" title="1. Github Pages"></a>1. Github Pages</h2><p>Github Pages 是 Github 提供的静态页面服务，依据其<a href="https://pages.github.com/" target="_blank" rel="noopener">官网</a>，使用的方式比较简单。<br>大体的 Gist 就是</p>
-<ol>
-<li>创建名称为 username.github.io 的代码仓库</li>
-<li>将 Web 静态资源通过 Git push 到 username.github.io</li>
-</ol>
-<p>其中 username 为具体用户登录 Github 网站的账号名称，当浏览器访问 <a href="https://username.github.io" target="_blank" rel="noopener">https://username.github.io</a> 时，仓库 master 目录下的静态资源就会被加载。</p>
-<table>
-<thead>
-<tr>
-<th>Branch</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>develop</td>
-<td>开发分支，管理 Markdown 源码与项目配置文件</td>
-</tr>
-<tr>
-<td>master</td>
-<td>存储基于 develop 分支源码生成的静态资源文件</td>
-</tr>
-</tbody></table>
-<h2 id="2-流程"><a href="#2-流程" class="headerlink" title="2. 流程"></a>2. 流程</h2><p><img src="/images/blog.png" alt=""></p>
-<ol>
-<li>Hexo 用于将 <strong>Markdown</strong> 编写的博客文章源文件生成为静态页面</li>
-<li>Github pages serve 生成的静态文件，在公网上提供访问接口</li>
-<li>travis 由 develop 分支的新 commit 触发，执行 hexo generate 命令生成静态文件，并将生成的内容 push 到 master 分支</li>
-</ol>
-<h2 id="3-Hexo"><a href="#3-Hexo" class="headerlink" title="3. Hexo"></a>3. Hexo</h2><blockquote>
-<p>A fast, simple &amp; powerful blog framework.</p>
-</blockquote>
-<h3 id="安装命令行工具"><a href="#安装命令行工具" class="headerlink" title="安装命令行工具"></a>安装命令行工具</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-cli -g</span><br></pre></td></tr></table></figure>
-
-<h3 id="Hexo-的常用命令"><a href="#Hexo-的常用命令" class="headerlink" title="Hexo 的常用命令"></a>Hexo 的常用命令</h3><p>创建新文章</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>本地服务器</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo server</span><br></pre></td></tr></table></figure>
-
-<p>生成静态页面</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>部署</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
-
-<h2 id="4-Travis"><a href="#4-Travis" class="headerlink" title="4. Travis"></a>4. Travis</h2><blockquote>
-<p>A hosted continuous integration service used to build and test software projects hosted at GitHub</p>
-</blockquote>
-<p>Travis 为 Github 的公开仓库提供免费的构建服务。</p>
-<h3 id="整合-Github"><a href="#整合-Github" class="headerlink" title="整合 Github"></a>整合 Github</h3><ol>
-<li><a href="https://github.com/marketplace/travis-ci" target="_blank" rel="noopener">https://github.com/marketplace/travis-ci</a> 添加 Travis App.</li>
-<li><a href="https://github.com/settings/installations" target="_blank" rel="noopener">https://github.com/settings/installations</a> 为 Travis 添加访问 Github 公开仓库的权限</li>
-<li>打开 <a href="https://github.com/settings/tokens" target="_blank" rel="noopener">https://github.com/settings/tokens</a> 生成 Token 供 Travis 使用<br><img src="/images/github_token.png" alt=""></li>
-</ol>
-<h3 id="travis-yml"><a href="#travis-yml" class="headerlink" title=".travis.yml"></a>.travis.yml</h3><p>完成整合后，在项目根目录下添加 <code>.travis.yml</code> 配置文件。</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">sudo:</span> <span class="literal">false</span></span><br><span class="line"><span class="attr">language:</span> <span class="string">node_js</span></span><br><span class="line"><span class="attr">node_js:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="number">10</span></span><br><span class="line"><span class="attr">cache:</span> <span class="string">npm</span></span><br><span class="line"><span class="attr">branches:</span></span><br><span class="line">  <span class="attr">only:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">develop</span></span><br><span class="line"><span class="attr">script:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">hexo</span> <span class="string">generate</span> <span class="comment"># generate static files</span></span><br><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">provider:</span> <span class="string">pages</span></span><br><span class="line">  <span class="attr">skip-cleanup:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">github-token:</span> <span class="string">$GH_TOKEN</span></span><br><span class="line">  <span class="attr">keep-history:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">target_branch:</span> <span class="string">master</span></span><br><span class="line">  <span class="attr">on:</span></span><br><span class="line">    <span class="attr">branch:</span> <span class="string">develop</span></span><br><span class="line">  <span class="attr">local-dir:</span> <span class="string">public</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>github-token: 需要在 travis 中添加 <strong>GH_TOKEN</strong> 环境变量，环境变量的值为之前生成的 token</li>
-<li>develop 分支用于管理博客 markdown 内容，hexo 配置文件</li>
-<li><code>target_branch: master</code> 指定 travis 将 <code>hexo generate</code> 生成的静态资源文件 push 到 master 分支</li>
-</ul>
-<h2 id="5-Summary"><a href="#5-Summary" class="headerlink" title="5. Summary"></a>5. Summary</h2><p>详细配置请参考 <a href="https://github.com/RockingJavaBean/rockingjavabean.github.io" target="_blank" rel="noopener">repo</a>，博客访问地址为 <a href="https://rockingjavabean.github.io" target="_blank" rel="noopener">rockingjavabean.github.io</a>。</p>
-<p>以上<br>RockingJavaBean</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
     
       
 
@@ -563,6 +381,189 @@
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/01/setup-blog/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="RockingJavaBean">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RockingJavaBean's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/06/01/setup-blog/" itemprop="url">个人博客：Hexo + Github Pages + travis</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-06-01T10:00:00+00:00">2020-06-01</time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>记录一下使用 <strong>Hexo</strong>, <strong>Github pages</strong> 和 <strong>Travis</strong> 搭建个人博客的过程。</p>
+<p>目前实现的效果是，本地使用 <strong>Markdown</strong> 编写博客文章，travis 自动基于仓库源码，构建静态资源，完成网站部署。<br>以上均为<strong>免费</strong>服务，无需花钱租用虚拟主机。</p>
+<h2 id="1-Github-Pages"><a href="#1-Github-Pages" class="headerlink" title="1. Github Pages"></a>1. Github Pages</h2><p>Github Pages 是 Github 提供的静态页面服务，依据其<a href="https://pages.github.com/" target="_blank" rel="noopener">官网</a>，使用的方式比较简单。<br>大体的 Gist 就是</p>
+<ol>
+<li>创建名称为 username.github.io 的代码仓库</li>
+<li>将 Web 静态资源通过 Git push 到 username.github.io</li>
+</ol>
+<p>其中 username 为具体用户登录 Github 网站的账号名称，当浏览器访问 <a href="https://username.github.io" target="_blank" rel="noopener">https://username.github.io</a> 时，仓库 master 目录下的静态资源就会被加载。</p>
+<table>
+<thead>
+<tr>
+<th>Branch</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>develop</td>
+<td>开发分支，管理 Markdown 源码与项目配置文件</td>
+</tr>
+<tr>
+<td>master</td>
+<td>存储基于 develop 分支源码生成的静态资源文件</td>
+</tr>
+</tbody></table>
+<h2 id="2-流程"><a href="#2-流程" class="headerlink" title="2. 流程"></a>2. 流程</h2><p><img src="/images/blog.png" alt=""></p>
+<ol>
+<li>Hexo 用于将 <strong>Markdown</strong> 编写的博客文章源文件生成为静态页面</li>
+<li>Github pages serve 生成的静态文件，在公网上提供访问接口</li>
+<li>travis 由 develop 分支的新 commit 触发，执行 hexo generate 命令生成静态文件，并将生成的内容 push 到 master 分支</li>
+</ol>
+<h2 id="3-Hexo"><a href="#3-Hexo" class="headerlink" title="3. Hexo"></a>3. Hexo</h2><blockquote>
+<p>A fast, simple &amp; powerful blog framework.</p>
+</blockquote>
+<h3 id="安装命令行工具"><a href="#安装命令行工具" class="headerlink" title="安装命令行工具"></a>安装命令行工具</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-cli -g</span><br></pre></td></tr></table></figure>
+
+<h3 id="Hexo-的常用命令"><a href="#Hexo-的常用命令" class="headerlink" title="Hexo 的常用命令"></a>Hexo 的常用命令</h3><p>创建新文章</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+
+<p>本地服务器</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo server</span><br></pre></td></tr></table></figure>
+
+<p>生成静态页面</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>部署</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-Travis"><a href="#4-Travis" class="headerlink" title="4. Travis"></a>4. Travis</h2><blockquote>
+<p>A hosted continuous integration service used to build and test software projects hosted at GitHub</p>
+</blockquote>
+<p>Travis 为 Github 的公开仓库提供免费的构建服务。</p>
+<h3 id="整合-Github"><a href="#整合-Github" class="headerlink" title="整合 Github"></a>整合 Github</h3><ol>
+<li><a href="https://github.com/marketplace/travis-ci" target="_blank" rel="noopener">https://github.com/marketplace/travis-ci</a> 添加 Travis App.</li>
+<li><a href="https://github.com/settings/installations" target="_blank" rel="noopener">https://github.com/settings/installations</a> 为 Travis 添加访问 Github 公开仓库的权限</li>
+<li>打开 <a href="https://github.com/settings/tokens" target="_blank" rel="noopener">https://github.com/settings/tokens</a> 生成 Token 供 Travis 使用<br><img src="/images/github_token.png" alt=""></li>
+</ol>
+<h3 id="travis-yml"><a href="#travis-yml" class="headerlink" title=".travis.yml"></a>.travis.yml</h3><p>完成整合后，在项目根目录下添加 <code>.travis.yml</code> 配置文件。</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">sudo:</span> <span class="literal">false</span></span><br><span class="line"><span class="attr">language:</span> <span class="string">node_js</span></span><br><span class="line"><span class="attr">node_js:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="number">10</span></span><br><span class="line"><span class="attr">cache:</span> <span class="string">npm</span></span><br><span class="line"><span class="attr">branches:</span></span><br><span class="line">  <span class="attr">only:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">develop</span></span><br><span class="line"><span class="attr">script:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">hexo</span> <span class="string">generate</span> <span class="comment"># generate static files</span></span><br><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">provider:</span> <span class="string">pages</span></span><br><span class="line">  <span class="attr">skip-cleanup:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">github-token:</span> <span class="string">$GH_TOKEN</span></span><br><span class="line">  <span class="attr">keep-history:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">target_branch:</span> <span class="string">master</span></span><br><span class="line">  <span class="attr">on:</span></span><br><span class="line">    <span class="attr">branch:</span> <span class="string">develop</span></span><br><span class="line">  <span class="attr">local-dir:</span> <span class="string">public</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>github-token: 需要在 travis 中添加 <strong>GH_TOKEN</strong> 环境变量，环境变量的值为之前生成的 token</li>
+<li>develop 分支用于管理博客 markdown 内容，hexo 配置文件</li>
+<li><code>target_branch: master</code> 指定 travis 将 <code>hexo generate</code> 生成的静态资源文件 push 到 master 分支</li>
+</ul>
+<h2 id="5-Summary"><a href="#5-Summary" class="headerlink" title="5. Summary"></a>5. Summary</h2><p>详细配置请参考 <a href="https://github.com/RockingJavaBean/rockingjavabean.github.io" target="_blank" rel="noopener">repo</a>，博客访问地址为 <a href="https://rockingjavabean.github.io" target="_blank" rel="noopener">rockingjavabean.github.io</a>。</p>
+<p>以上<br>RockingJavaBean</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
@@ -622,7 +623,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
