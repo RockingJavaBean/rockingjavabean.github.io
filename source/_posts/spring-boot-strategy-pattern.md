@@ -1,7 +1,7 @@
 ---
 title: spring boot 中实现策略模式
 date: 2021-06-16 10:58:12
-tags: spring-boot design pattern strategy spring 设计模式
+tags: spring-boot, design pattern, strategy pattern, spring, 设计模式
 ---
 
 
@@ -34,7 +34,7 @@ RoadStrategy 实现类
 ```java
 @Component("RoadStrategy")
 public class RoadStrategy implements RoutingStrategy {
-  Route buildRoute() {
+  public Route buildRoute() {
     return new Route("road");
   };
 }
@@ -44,7 +44,7 @@ PublicTransportStrategy 实现类
 ```java
 @Component("PublicTransportStrategy")
 public class PublicTransportStrategy implements RoutingStrategy {
-  Route buildRoute() {
+  public Route buildRoute() {
     return new Route("PublicTransport");
   };
 }
@@ -54,7 +54,7 @@ WalkingStrategy 实现类
 ```java
 @Component("WalkingStrategy")
 public class WalkingStrategy implements RoutingStrategy {
-  Route buildRoute() {
+  public Route buildRoute() {
     return new Route("Walking");
   };
 }
@@ -169,13 +169,29 @@ private Object resolveMultipleBeans(DependencyDescriptor descriptor, @Nullable S
 }
 ```
 
-结论
-- 如果是数组，则获取数组元素类型，查找匹配该类型的所有 bean，返回一个这些 bean 的数组。
-- 如果该类可赋给 Collection，并且是一个接口，则获取集合元素类型，查找匹配该类型的所有 bean，返回一个这些bean的集合。
-- 如果该类型是 Map，且 key 是 String 类型，则获取 Map 的 value 的类型，查找匹配该类型的所有 bean，这是一个 key 为 bean name，value 为 bean 实例的一个Map。
+**1. `if (type.isArray())` 分支**
+如果需要装配的对象类型为数组，通过 `findAutowireCandidates` 方法在 Spring IOC 容器中找到与数组成员类型匹配的 bean。
+并将找到的 bean 放置在数组中，返回给装配对象。
 
+```java
+@Autowired RoutingStrategy[] routingStrategies;
+```
 
-Reference:
+routingStrategies 的成员为 `RoadStrategy`, `PublicTransportStrategy`, `WalkingStrategy`。
+
+**2. `Collection.class.isAssignableFrom(type) && type.isInterface()` 分支**
+
+```java
+@Autowired List<RoutingStrategy> routingStrategies;
+```
+
+与数组处理逻辑类似，处理 Java 集合的装配对象，但是要求集合中成员的类型为接口。
+
+**3. `Map.class == type` 分支**
+
+对应上文 `Map<String, RoutingStrategy> routingStrategies` 自动装载。Spring 会将 bean 名称设置为 key，并将 bean 的引用设置为对应的 value。
+
+### Reference:
 - https://refactoringguru.cn/design-patterns/strategy
 - https://spring.io/
 - https://www.baeldung.com/spring-injecting-collections
